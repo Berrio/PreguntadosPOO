@@ -14,12 +14,11 @@ public class Jugar {
         return juego;
     }
 
-    public void inicializar(){
+    public void inicializarPreguntas(){
         juego.CrearpreguntaYRespuesta();
     }
     public int ArrojarPregunta(){
 
-            inicializar();
 
             int min_val = 0;
             int max_val = juego.getPreguntasYRespuestas().size();
@@ -65,10 +64,12 @@ public class Jugar {
         boolean esResValida=juego.getPreguntasYRespuestas().get(idPregunta).getArrayRespuestas().get(numeroDeRespuesta).Esvalida();
         if (posRespuestaseleccionada && esResValida)
         {
-            System.out.println(posRespuestaseleccionada+" "+esResValida);
             return acerto=true;
         }
         return acerto;
+    }
+    public void crearpreguntapers(String pregunta,String categoria,int dificultad){
+        juego.CrearpreguntaYRespuestaPersonalizada( pregunta, categoria, dificultad);
     }
 
     public ArrayList RespuestasAleatorias(){

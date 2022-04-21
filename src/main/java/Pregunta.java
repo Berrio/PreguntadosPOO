@@ -3,7 +3,6 @@ import java.util.LinkedList;
 
 public class Pregunta {
 
-    private int id;
     private String pregunta;
     private ArrayList<Respuesta>ArrayRespuestas;
     private String categoria;
@@ -20,9 +19,8 @@ public class Pregunta {
         this.pregunta = pregunta;
     }
 
-    public void setPregunta(int id, String pregunta, String categoria, int dificultad) {
+    public void setPregunta(String pregunta, String categoria, int dificultad) {
         this.pregunta = pregunta;
-        this.id = id;
         this.categoria=categoria;
         this.dificultad=dificultad;
     }
@@ -36,13 +34,14 @@ public class Pregunta {
     }
 
 
-    public void agregarRespuestas(int id,String posicion, String res, boolean escorrecta){
+    public void agregarRespuestas(String posicion, String res, boolean escorrecta){
             Respuesta respuesta=new Respuesta();
-            respuesta.setRespuesta(this.id,posicion,res,escorrecta);
+            respuesta.setRespuesta(posicion,res,escorrecta);
             ArrayRespuestas.add(respuesta);
     }
 
     public ArrayList<Respuesta> getArrayRespuestas() {
         return ArrayRespuestas;
     }
+
 }

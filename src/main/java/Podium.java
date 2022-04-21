@@ -1,17 +1,26 @@
 import java.util.ArrayList;
 
 public class Podium {
-    ArrayList<Jugador> jugadors;
+    ArrayList<Jugador> jugadores;
 
     public Podium(){
-        jugadors=new ArrayList<>();
+        jugadores=new ArrayList<>();
     }
 
     public void setJugadorEnPodium(Jugador jugador){
-        jugadors.add(jugador);
+        jugadores.add(jugador);
     }
 
-    public ArrayList<Jugador> getJugadorEnPodium(){
-        return jugadors;
+    public void getJugadorEnPodium(){
+
+        if (jugadores.size()==0){
+            System.out.println("Aun no han jugado");
+        }else
+        {
+            for (int i=0;i<jugadores.size();i++){
+                System.out.println("Nombre: "+jugadores.get(i).getNombre()+" Puntaje: "+jugadores.get(i).getPuntaje());
+            }
+        }
+
     }
 }

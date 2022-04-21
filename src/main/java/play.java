@@ -1,22 +1,21 @@
 public class play {
-    public play(){
+    int contAciertos;
+    Jugar jugar ;
 
+    public play(){
+        contAciertos=0;
+        jugar = new Jugar();
     }
 
-    public void jugar2(){
-        Jugar jugar = new Jugar();
-        jugar.inicializar();
-        Jugador jugador=new Jugador();
-        Podium podium=new Podium();
+    public int getContAciertos() {
+        return contAciertos;
+    }
 
+    public void inicializarJuego(){
 
-        if (!jugador.setNombre()){
-            System.out.println("sin nombre no puedes continuar");
-            return;
-        }
-
+        jugar.inicializarPreguntas();
+        System.out.println("Cantidad Preguntas: "+jugar.getJuego().getPreguntasYRespuestas().size());
         int cont=1;
-        int contAciertos=0;
         boolean contestoBien=true;
         while(cont<=jugar.getJuego().getPreguntasYRespuestas().size()&&contestoBien){
             int idPregunta=jugar.ArrojarPregunta();
@@ -30,17 +29,19 @@ public class play {
                 System.out.println("Respondiste mal");
                 contestoBien=false;
             }
+            System.out.println("Cantidad Preguntas:: "+jugar.getJuego().getPreguntasYRespuestas().size());
+            System.out.println("");
             cont++;
         }
 
         System.out.println("Fin del Juego");
-        jugador.getNombre();
-        jugador.setPuntaje(contAciertos*100);
-        System.out.println("Tu puntaje es: "+jugador.getPuntaje());
-        podium.setJugadorEnPodium(jugador);
+        System.out.println("");
 
 
-        System.out.println(podium.getJugadorEnPodium().get(0).getNombre());
     }
+    public void crearpreguntaPersonalizada(String pregunta,String categoria,int dificultad){
+        jugar.crearpreguntapers( pregunta, categoria, dificultad);
+    }
+
 
 }

@@ -17,7 +17,7 @@ public class Respuesta {
         return esvalida;
     }
 
-    public void setRespuesta(int idPregunta,String posicion, String respuesta, boolean esvalida) {
+    public void setRespuesta(String posicion, String respuesta, boolean esvalida) {
         this.idPregunta= idPregunta;
         this.posicion=posicion;
         this.respuesta= respuesta;
