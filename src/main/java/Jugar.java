@@ -4,21 +4,31 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Jugar {
+
     private Juego juego;
 
     public Jugar(){
         juego=new Juego();
     }
+    public Juego getJuego() {
+        return juego;
+    }
+
+    public void inicializar(){
+        juego.CrearpreguntaYRespuesta();
+    }
     public int ArrojarPregunta(){
 
-        juego.CrearpreguntaYRespuesta();
+            inicializar();
 
             int min_val = 0;
             int max_val = juego.getPreguntasYRespuestas().size();
             Random rand = new Random();
             int randomNum = min_val + rand.nextInt((max_val - min_val) );
 
+
             System.out.println(juego.getPreguntasYRespuestas().get(randomNum).getPregunta());
+            System.out.println("Categoria: "+juego.getPreguntasYRespuestas().get(randomNum).getCategoria());
             System.out.println(juego.getPreguntasYRespuestas().get(randomNum).getArrayRespuestas().get(0).getPosicion()+" "+juego.getPreguntasYRespuestas().get(randomNum).getArrayRespuestas().get(0).getRespuesta()+" "+juego.getPreguntasYRespuestas().get(randomNum).getArrayRespuestas().get(0).Esvalida());
             System.out.println(juego.getPreguntasYRespuestas().get(randomNum).getArrayRespuestas().get(1).getPosicion()+" "+juego.getPreguntasYRespuestas().get(randomNum).getArrayRespuestas().get(1).getRespuesta()+" "+juego.getPreguntasYRespuestas().get(randomNum).getArrayRespuestas().get(1).Esvalida());
             System.out.println(juego.getPreguntasYRespuestas().get(randomNum).getArrayRespuestas().get(2).getPosicion()+" "+juego.getPreguntasYRespuestas().get(randomNum).getArrayRespuestas().get(2).getRespuesta()+" "+juego.getPreguntasYRespuestas().get(randomNum).getArrayRespuestas().get(2).Esvalida());
@@ -50,17 +60,21 @@ public class Jugar {
                 numeroDeRespuesta=3;
                 break;
             }
-
         }
-
-            if (respuesta.matches(juego.getPreguntasYRespuestas().get(idPregunta).getArrayRespuestas().get(numeroDeRespuesta).getPosicion())&&
-                    juego.getPreguntasYRespuestas().get(idPregunta).getArrayRespuestas().get(numeroDeRespuesta).Esvalida());
-            {
-                System.out.println(respuesta.equals(juego.getPreguntasYRespuestas().get(idPregunta).getArrayRespuestas().get(numeroDeRespuesta).getPosicion())+"&&"+
-                        juego.getPreguntasYRespuestas().get(idPregunta).getArrayRespuestas().get(numeroDeRespuesta).Esvalida());
-                return acerto=false;
-            }
+        boolean posRespuestaseleccionada=respuesta.matches(juego.getPreguntasYRespuestas().get(idPregunta).getArrayRespuestas().get(numeroDeRespuesta).getPosicion());
+        boolean esResValida=juego.getPreguntasYRespuestas().get(idPregunta).getArrayRespuestas().get(numeroDeRespuesta).Esvalida();
+        if (posRespuestaseleccionada && esResValida)
+        {
+            System.out.println(posRespuestaseleccionada+" "+esResValida);
+            return acerto=true;
+        }
+        return acerto;
     }
 
+    public ArrayList RespuestasAleatorias(){
+        //pendiente
+        ArrayList numeros=new ArrayList<>();
+        return numeros;
+    }
 
 }

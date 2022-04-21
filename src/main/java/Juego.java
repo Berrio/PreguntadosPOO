@@ -1,20 +1,20 @@
 import java.util.ArrayList;
 
 public class Juego {
-    private int puntaje;
-    private String Jugador;
-    private String categoria;
+    private int puntaje;        //pendiente
+    private String Jugador;     //pendiente
+    private String categoria;   //pendiente
     private ArrayList<Pregunta> preguntasYRespuestas;
 
 
     public void CrearpreguntaYRespuesta(){
         preguntasYRespuestas=new ArrayList<>();
         Pregunta pregunta =new Pregunta();
-        pregunta.setPregunta(1,"quien es aquel","inventos",1);
-        pregunta.agregarRespuestas(1,"A","nadie1",false);
-        pregunta.agregarRespuestas(1,"B","nadie2",false);
-        pregunta.agregarRespuestas(1,"C","nadie3",false);
-        pregunta.agregarRespuestas(1,"D","yo",true);
+        pregunta.setPregunta(1,"Cuanto mide la Torre Eiffel","Cultura General",1);
+        pregunta.agregarRespuestas(1,"A","150m",false);
+        pregunta.agregarRespuestas(1,"B","200m",false);
+        pregunta.agregarRespuestas(1,"C","300m",false);
+        pregunta.agregarRespuestas(1,"D","400m",true);
 
         preguntasYRespuestas.add(pregunta);
 
