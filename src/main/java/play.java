@@ -22,6 +22,7 @@ public class play {
             if(jugar.contestarPregunta(idPregunta)){
                 System.out.println("respondiste bien");
                 contAciertos++;
+                System.out.println("Tu puntaje hasta el momento es : "+contAciertos*100);
                 contestoBien=true;
             }
             else
