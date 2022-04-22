@@ -50,13 +50,14 @@ public class Jugar {
             System.out.println("");
             jugador.cambiarPuntaje(0);
             podium.agregarJugadorEnPodium(jugador);
+
+
             this.dificultad = 1;
             break;
         }
         System.out.println("¡¡¡¡FIN!!!!");
         System.out.println("");
-        podium.agregarJugadorEnPodium(jugador);
-        System.out.println("");
+
     }
 
     public void arrojarPregunta() {
@@ -131,11 +132,12 @@ public class Jugar {
     public Boolean contestarPregunta() {
         Boolean acierto = false;
         Scanner leer = new Scanner(System.in);
-        String respuesta = leer.nextLine().toUpperCase();
+        String respuesta;
         String laRespuesta = "";
         Boolean controlador = true;
         while (controlador){
             System.out.println("Ingrese una Opcion");
+            respuesta = leer.nextLine().toUpperCase();
             switch (respuesta) {
                 case "A": {
                     laRespuesta = listaRespuestas.get(0);
@@ -159,6 +161,7 @@ public class Jugar {
                 }
                 default:
                     System.out.println("Ingresaste una opción invalida");
+
             }
         }
         if (Objects.equals(laRespuesta, correcta)) {
@@ -167,4 +170,9 @@ public class Jugar {
         }
         return acierto;
     }
+
+    public Podium getPodium() {
+        return podium;
+    }
+
 }
