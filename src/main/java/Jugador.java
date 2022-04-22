@@ -2,29 +2,23 @@ import java.util.Scanner;
 
 public class Jugador {
 
-    private String Nombre;
-    private  int puntaje;
+    protected String nombreUsuario;
+    protected Integer puntaje;
 
-    public String getNombre() {
-        return Nombre;
+    public Jugador(String nombre, Integer puntaje) {
+        this.nombreUsuario = nombre;
+        this.puntaje = puntaje;
     }
 
-    public boolean setNombre() {
-        Scanner leer=new Scanner(System.in);
-        System.out.println("Ingresa tu nombre de Usuario");
-        String nombre=leer.nextLine();
-        Nombre = nombre;
-        if (nombre.isEmpty()){
-            return false;
-        }
-        return true;
+    public String obtenerNombre() {
+        return this.nombreUsuario;
     }
 
-    public int getPuntaje() {
-        return puntaje;
+    public int obtenerPuntaje() {
+        return this.puntaje;
     }
 
-    public void setPuntaje(int puntaje) {
+    public void cambiarPuntaje(int puntaje) {
         this.puntaje = puntaje;
     }
 }
