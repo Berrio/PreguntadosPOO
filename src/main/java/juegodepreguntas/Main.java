@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) throws IOException {
         String salir = "";
-        Podium podium = new Podium();
+        Jugar play = new Jugar();
         Scanner leer = new Scanner(System.in);
         while (salir.isEmpty()) {
             System.out.println("");
@@ -22,11 +22,12 @@ public class Main {
             String respuesta = leer.nextLine().toUpperCase();
 
             if (respuesta.matches("A")) {
-                Jugar play = new Jugar();
+
                 play.inicializarPreguntas();
             }
             if (respuesta.matches("B")) {
-                podium.obtenerJugadorEnPodium();
+                play.getPodium().obtenerJugadorEnPodium();
+
             }
             System.out.println("Si desea continuar pulse ENTER de lo contrario escriba x");
             Scanner leerSalir = new Scanner(System.in);

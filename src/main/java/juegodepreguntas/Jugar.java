@@ -49,14 +49,14 @@ public class Jugar {
             System.out.println("Respondiste mal");
             System.out.println("");
             jugador.cambiarPuntaje(0);
-            podium.agregarJugadorEnPodium(jugador);
+
             this.dificultad = 1;
             break;
         }
+        podium.agregarJugadorEnPodium(jugador);
         System.out.println("¡¡¡¡FIN!!!!");
         System.out.println("");
-        podium.agregarJugadorEnPodium(jugador);
-        System.out.println("");
+
     }
 
     public void arrojarPregunta() {
@@ -167,4 +167,9 @@ public class Jugar {
         }
         return acierto;
     }
+
+    public Podium getPodium() {
+        return podium;
+    }
+
 }
