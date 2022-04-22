@@ -1,3 +1,5 @@
+package juegodepreguntas;
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -6,7 +8,6 @@ import java.util.List;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-
 
 public class Pregunta {
 
@@ -34,13 +35,12 @@ public class Pregunta {
         this.opcion4 = opcion4;
         this.opcionCorrecta = opcionCorrecta;
     }
-
     //Leer preguntas desde el Json
     public void leerPreguntas() throws IOException {
 
         JSONParser jsonParser = new JSONParser();
         final String dir = System.getProperty("user.dir");
-        try (FileReader reader = new FileReader(dir + "\\PreguntadosPOO\\src\\main\\java\\preguntas.json")) {
+        try (FileReader reader = new FileReader(dir + "\\src\\main\\java\\juegodepreguntas\\preguntas.json")) {
             //Read JSON file
             Object obj = jsonParser.parse(reader);
 

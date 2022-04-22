@@ -1,8 +1,13 @@
+package juegodepreguntas;
+
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Random;
+import java.util.Scanner;
+import java.util.List;
+import java.util.Objects;
 
 public class Jugar {
-
     protected Integer contAciertos;
     protected Integer dificultad;
     Random rand = new Random();
@@ -22,15 +27,14 @@ public class Jugar {
     }
 
     public void inicializarPreguntas() {
-        Boolean contestoBien = true;
         System.out.println("Ingresa tu nombre de Usuario");
         String nombre = leer.nextLine();
-        if (nombre.isEmpty()){
+        if (nombre.isEmpty()) {
             nombre = "Anonimo";
         }
-        Jugador jugador = new Jugador(nombre,0);
-        while (this.dificultad <=5 && contestoBien) {
-            ArrojarPregunta();
+        Jugador jugador = new Jugador(nombre, 0);
+        while (this.dificultad <= 5) {
+            arrojarPregunta();
             if (contestarPregunta()) {
                 System.out.println("Respondiste bien");
                 System.out.println("");
@@ -46,8 +50,7 @@ public class Jugar {
             System.out.println("");
             jugador.cambiarPuntaje(0);
             podium.agregarJugadorEnPodium(jugador);
-            contestoBien = false;
-            this.dificultad=1;
+            this.dificultad = 1;
             break;
         }
         System.out.println("¡¡¡¡FIN!!!!");
@@ -56,24 +59,26 @@ public class Jugar {
         System.out.println("");
     }
 
-    public void ArrojarPregunta() {
+    public void arrojarPregunta() {
         Integer randomNum = 0;
-        List<Pregunta> lista =  app.listPreguntas;
-        switch (this.dificultad){
+        List<Pregunta> lista = app.listPreguntas;
+        switch (this.dificultad) {
             case 1:
                 randomNum = rand.nextInt(5);
                 break;
             case 2:
-                randomNum = 5 + rand.nextInt((10-5));
+                randomNum = 5 + rand.nextInt((10 - 5));
                 break;
             case 3:
-                randomNum = 10 + rand.nextInt((15-10));
+                randomNum = 10 + rand.nextInt((15 - 10));
                 break;
             case 4:
-                randomNum = 15 + rand.nextInt((20-15));
+                randomNum = 15 + rand.nextInt((20 - 15));
                 break;
             case 5:
-                randomNum = 20 + rand.nextInt((25-20));
+                randomNum = 20 + rand.nextInt((25 - 20));
+                break;
+            default:
                 break;
         }
 
@@ -88,15 +93,15 @@ public class Jugar {
         System.out.println("");
     }
 
-    public void opciones(){
-        Integer i=0;
+    public void opciones() {
+        Integer i = 0;
         char opcion = 'a';
         String seleccion;
         List<Integer> aleatorio = new ArrayList<>();
         Integer numeroRandom;
-        while (i<4){
+        while (i < 4) {
             numeroRandom = rand.nextInt(4);
-            if(!(aleatorio.contains(numeroRandom))){
+            if (!(aleatorio.contains(numeroRandom))) {
                 seleccion = seleccionadas(numeroRandom);
                 System.out.println(opcion + ")" + seleccion);
                 listaRespuestas.add(seleccion);
@@ -107,8 +112,8 @@ public class Jugar {
         }
     }
 
-    public String seleccionadas(Integer numeroRandom){
-        switch (numeroRandom){
+    public String seleccionadas(Integer numeroRandom) {
+        switch (numeroRandom) {
             case 0:
                 return a;
             case 1:
@@ -117,37 +122,46 @@ public class Jugar {
                 return c;
             case 3:
                 return d;
+            default:
+                return "";
         }
-        return "";
     }
 
 
     public Boolean contestarPregunta() {
         Boolean acierto = false;
-        System.out.println("Ingrese una Opcion");
         Scanner leer = new Scanner(System.in);
         String respuesta = leer.nextLine().toUpperCase();
         String laRespuesta = "";
-        switch (respuesta) {
-            case "A": {
-                laRespuesta = listaRespuestas.get(0);
-                break;
-            }
-            case "B": {
-                laRespuesta = listaRespuestas.get(1);
-                break;
-            }
-            case "C": {
-                laRespuesta = listaRespuestas.get(2);
-                break;
-            }
-            case "D": {
-                laRespuesta = listaRespuestas.get(3);
-                break;
+        Boolean controlador = true;
+        while (controlador){
+            System.out.println("Ingrese una Opcion");
+            switch (respuesta) {
+                case "A": {
+                    laRespuesta = listaRespuestas.get(0);
+                    controlador=false;
+                    break;
+                }
+                case "B": {
+                    laRespuesta = listaRespuestas.get(1);
+                    controlador=false;
+                    break;
+                }
+                case "C": {
+                    laRespuesta = listaRespuestas.get(2);
+                    controlador=false;
+                    break;
+                }
+                case "D": {
+                    laRespuesta = listaRespuestas.get(3);
+                    controlador=false;
+                    break;
+                }
+                default:
+                    System.out.println("Ingresaste una opción invalida");
             }
         }
-
-        if (Objects.equals(laRespuesta, correcta)){
+        if (Objects.equals(laRespuesta, correcta)) {
             listaRespuestas.clear();
             return true;
         }

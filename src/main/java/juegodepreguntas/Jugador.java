@@ -1,7 +1,6 @@
-import java.util.Scanner;
+package juegodepreguntas;
 
 public class Jugador {
-
     protected String nombreUsuario;
     protected Integer puntaje;
 
@@ -22,3 +21,4 @@ public class Jugador {
         this.puntaje = puntaje;
     }
 }
+
