@@ -1,5 +1,6 @@
 package juegodepreguntas;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -40,7 +41,8 @@ public class Pregunta {
 
         JSONParser jsonParser = new JSONParser();
         final String dir = System.getProperty("user.dir");
-        try (FileReader reader = new FileReader(dir + "\\src\\main\\java\\juegodepreguntas\\preguntas.json")) {
+        final String jsonFile = dir + "\\src\\main\\java\\juegodepreguntas\\preguntas.json";
+        try (FileReader reader = new FileReader(jsonFile.replaceAll("\\\\", File.separator))) {
             //Read JSON file
             Object obj = jsonParser.parse(reader);
 
