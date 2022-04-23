@@ -9,7 +9,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-public class Pregunta {
+public class Pregunta implements Datos {
 
     protected String pregunta;
     protected String categoria;
@@ -18,9 +18,9 @@ public class Pregunta {
     protected String opcion3;
     protected String opcion4;
     protected String opcionCorrecta;
-
     protected List<Pregunta> listPreguntas = new ArrayList<>();
 
+    //Constructor generico para inicializar la lectura de las preguntas.
     public Pregunta() throws IOException {
         leerPreguntas();
     }
@@ -35,7 +35,9 @@ public class Pregunta {
         this.opcion4 = opcion4;
         this.opcionCorrecta = opcionCorrecta;
     }
+
     //Leer preguntas desde el Json
+    @Override
     public void leerPreguntas() throws IOException {
 
         JSONParser jsonParser = new JSONParser();
@@ -68,6 +70,6 @@ public class Pregunta {
         this.opcion4 = (String) preguntaObject.get("opcionCorrecta");
         this.opcionCorrecta = (String) preguntaObject.get("opcionCorrecta");
 
-        listPreguntas.add(new Pregunta(pregunta,categoria,opcion1,opcion2,opcion3,opcion4,opcionCorrecta));
+        listPreguntas.add(new Pregunta(pregunta, categoria, opcion1, opcion2, opcion3, opcion4, opcionCorrecta));
     }
 }

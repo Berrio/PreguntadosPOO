@@ -7,34 +7,39 @@ import java.util.Scanner;
 import java.util.List;
 import java.util.Objects;
 
-public class Jugar {
-    protected Integer contAciertos;
-    protected Integer dificultad;
+public class Jugar extends Podium{
+
+    private Integer contAciertos;
+    private Integer dificultad;
+    private boolean salir = false;
+    private String correcta;
+    private String a = "";
+    private  String b = "";
+    private String c = "";
+    private String d = "";
+    private List<String> listaRespuestas = new ArrayList<>();
     Random rand = new Random();
     Pregunta app = new Pregunta();
-    Podium podium = new Podium();
-    String correcta = "";
-    String a = "";
-    String b = "";
-    String c = "";
-    String d = "";
     Scanner leer = new Scanner(System.in);
-    List<String> listaRespuestas = new ArrayList<>();
 
     public Jugar() throws IOException {
         this.contAciertos = 0;
         this.dificultad = 1;
     }
 
-    public void inicializarPreguntas() {
+    //Este metodo inicia el juego
+    public void inicializarJuego() {
         System.out.println("Ingresa tu nombre de Usuario");
         String nombre = leer.nextLine();
         if (nombre.isEmpty()) {
             nombre = "Anonimo";
         }
+        salir = false;
         Jugador jugador = new Jugador(nombre, 0);
         while (this.dificultad <= 5) {
             arrojarPregunta();
+            System.out.println("--------------------------");
+            System.out.println("Si desea salir ingrese X");
             if (contestarPregunta()) {
                 System.out.println("Respondiste bien");
                 System.out.println("");
@@ -45,21 +50,35 @@ public class Jugar {
                 this.dificultad++;
                 continue;
             }
+            if (salir) {
+                jugadores.add(jugador);
+                contAciertos=0;
+                this.dificultad=1;
+                break;
+            }
             System.out.println("");
             System.out.println("Respondiste mal");
             System.out.println("");
             jugador.cambiarPuntaje(0);
-            podium.agregarJugadorEnPodium(jugador);
+            jugadores.add(jugador);
+            contAciertos=0;
             this.dificultad = 1;
             break;
         }
+        if (dificultad==6){
+            jugadores.add(jugador);
+            contAciertos=0;
+            this.dificultad=1;
+            System.out.println("¡¡¡GANASTEEEE!!!!");
+        }
         System.out.println("¡¡¡¡FIN!!!!");
         System.out.println("");
-        podium.agregarJugadorEnPodium(jugador);
-        System.out.println("");
+
     }
 
+    //Este metodo entrega las preguntas con sus respectivas respuestas
     public void arrojarPregunta() {
+        correcta ="";
         Integer randomNum = 0;
         List<Pregunta> lista = app.listPreguntas;
         switch (this.dificultad) {
@@ -88,12 +107,13 @@ public class Jugar {
         b = String.valueOf(lista.get(randomNum).opcion2);
         c = String.valueOf(lista.get(randomNum).opcion3);
         d = String.valueOf(lista.get(randomNum).opcion4);
-        opciones();
+        opcionesRespuestas();
         correcta = String.valueOf(lista.get(randomNum).opcionCorrecta);
         System.out.println("");
     }
 
-    public void opciones() {
+    //Este metodo es llamado por arrojarPregunta() para entregar las respuestas
+    public void opcionesRespuestas() {
         Integer i = 0;
         char opcion = 'a';
         String seleccion;
@@ -112,6 +132,7 @@ public class Jugar {
         }
     }
 
+    // Este metodo lo requiere opcionesRespuestas() para generar un orden aleatoria a los respuestas
     public String seleccionadas(Integer numeroRandom) {
         switch (numeroRandom) {
             case 0:
@@ -127,44 +148,58 @@ public class Jugar {
         }
     }
 
-
+    //Este metodo verifica la respuesta y retorna si hay o no respuesta del usuario
     public Boolean contestarPregunta() {
         Boolean acierto = false;
-        Scanner leer = new Scanner(System.in);
-        String respuesta = leer.nextLine().toUpperCase();
+        String respuesta;
         String laRespuesta = "";
         Boolean controlador = true;
-        while (controlador){
+
+        while (controlador) {
             System.out.println("Ingrese una Opcion");
+            respuesta = leer.nextLine().toUpperCase();
             switch (respuesta) {
                 case "A": {
                     laRespuesta = listaRespuestas.get(0);
-                    controlador=false;
+                    controlador = false;
                     break;
                 }
                 case "B": {
                     laRespuesta = listaRespuestas.get(1);
-                    controlador=false;
+                    controlador = false;
                     break;
                 }
                 case "C": {
                     laRespuesta = listaRespuestas.get(2);
-                    controlador=false;
+                    controlador = false;
                     break;
                 }
                 case "D": {
                     laRespuesta = listaRespuestas.get(3);
-                    controlador=false;
+                    controlador = false;
                     break;
                 }
+                case "X": {
+                    salir = true;
+                    controlador = false;
+                    break;
+                }
+
                 default:
                     System.out.println("Ingresaste una opción invalida");
+
             }
         }
         if (Objects.equals(laRespuesta, correcta)) {
             listaRespuestas.clear();
             return true;
         }
+        listaRespuestas.clear();
         return acierto;
+    }
+
+    @Override
+    public List<Jugador> obtenerJugadores() {
+        return jugadores;
     }
 }

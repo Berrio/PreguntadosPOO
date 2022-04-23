@@ -9,14 +9,6 @@ public class Jugador {
         this.puntaje = puntaje;
     }
 
-    public String obtenerNombre() {
-        return this.nombreUsuario;
-    }
-
-    public int obtenerPuntaje() {
-        return this.puntaje;
-    }
-
     public void cambiarPuntaje(int puntaje) {
         this.puntaje = puntaje;
     }

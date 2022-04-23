@@ -1,23 +1,14 @@
 package juegodepreguntas;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class Podium {
-    ArrayList<Jugador> jugadores = new ArrayList<>();
+/**
+ * Podium: Clase abstracta para almacenar y obtener la lista de jugadores
+ */
+public abstract class Podium {
 
-    public void agregarJugadorEnPodium(Jugador jugador) {
-        jugadores.add(jugador);
-    }
+    protected static List<Jugador> jugadores = new ArrayList<>();
 
-    public void obtenerJugadorEnPodium() {
-
-        if (jugadores.size() == 0) {
-            System.out.println("Aun no han jugado");
-        } else {
-            for (int i = 0; i < jugadores.size(); i++) {
-                System.out.println("Nombre: " + jugadores.get(i).obtenerNombre() + " Puntaje: " + jugadores.get(i).obtenerPuntaje());
-            }
-        }
-
-    }
+    public abstract List<Jugador> obtenerJugadores();
 }
